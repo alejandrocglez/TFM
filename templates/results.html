@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel=stylesheet href="{{url_for('static', filename='css/index.css')}}" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel=stylesheet href="home.css" type="text/css">
+
+    <title>TFM: Results</title>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      var pSanchez = {{probs[0][3]}}
+      var sAbascal = {{probs[0][4]}}
+      var iArrimadas = {{probs[0][0]}}
+      var pIglesias = {{probs[0][2]}}
+      var pCasado = {{probs[0][1]}}
+
+
+      google.charts.load("current", {packages:['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ["Político", "Porcentaje de autoría", { role: "style" } ],
+            ["Santiago Abascal", sAbascal, "#48C520"],
+            ["Inés Arrimadas", iArrimadas, "#E38822"],
+            ["Pablo Casado", pCasado, "#1FA9F3"],
+            ["Pablo Iglesias", pIglesias, "color: #821DD1"],
+            ["Pedro Sánchez", pSanchez, "color: #CF2D1A"]
+
+        ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Probabilidad de autoría de cada político del discurso introducido ",
+        width: 600,
+        height: 400,
+        backgroundColor: {
+            stroke: 'lightgrey'
+        },
+          axisFontSize : 0,
+          vAxis : {textColor: 'lightgrey'},
+        backgroundColor:   'lightgrey',
+        bar: {groupWidth: "80%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+
+      chart.draw(view, options);}
+    </script>
+</head>
+<body style="background-color: lightgrey">
+    <h1 class = abs-center2>Conclusiones extraídas a partir del discurso introducido</h1>
+    <h2 class = abs-center2>{{esFake}} </h2>
+
+    <div class="container abs-center2">
+        <div class="row">
+            <div class="col-md-12 abs-center2">
+                <div class = 'col-md-6 '>
+                    <br>
+                    <p style="color: black"><u>Discurso introducido: </u></p>
+                    <p  align="justify" style="color: black">{{speech}}</p>
+                    <p><strong style="color: black"><u>Es más probable que la autoría del discurso sea de: {{resultt[0]}}</u></strong> </p>
+                    <p><strong style="color: #48C520">Porcentaje de similitud con Santiago Abascal: </strong> {{(probs[0][4])}}% </p>
+                    <p><strong style="color: #E38822">Porcentaje de similitud con Inés Arrimadas: </strong> {{probs[0][0]}}% </p>
+                    <p><strong style="color: #1FA9F3">Porcentaje de similitud con Pablo Casado: </strong> {{probs[0][1]}}% </p>
+                    <p><strong style="color: #821DD1">Porcentaje de similitud con Pablo Iglesias: </strong>{{probs[0][2]}}%</p>
+                    <p><strong style="color: #CF2D1A">Porcentaje de similitud con Pedro Sánchez: </strong>{{probs[0][3]}}%</p>
+
+
+                    <button class="btn btn-light"><a href="/">Inicio</a></button>
+                </div>
+                <div class="col-md-6">
+                    <div id="columnchart_values" style="width: 900px; height: 500px;">
+                    </div>
+            </div>
+            </div>
+
+        </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>

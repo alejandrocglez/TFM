@@ -1,0 +1,30 @@
+.abs-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10%;
+    margin-bottom: 1%;
+}
+.abs-center2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+    margin-bottom: 1%;
+}
+
+.form {
+  width: 450px;
+}
+
+.margins {
+  margin-left: 5%;
+  margin-bottom: 5%;
+  margin-right: 5%;
+  margin-top: 5%;
+}
+.margins2 {
+  margin-left: 1%;
+  margin-bottom: 1%;
+  margin-right: 1%;
+  margin-top: 1%;
+}
